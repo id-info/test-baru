@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook - Masuk atau Daftar</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f0f2f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .language-selector {
+        margin: 10px 0;
+        color: #1c1e21;
+      }
+
+      .facebook-logo {
+        width: 50px;
+        margin: 20px 0;
+      }
+
+      .login-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px 16px;
+        margin: 6px 0;
+        border: 1px solid #dddfe2;
+        border-radius: 6px;
+        font-size: 17px;
+      }
+
+      .login-btn {
+        background-color: #1877f2;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        width: 100%;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 16px 0;
+      }
+
+      .forgot-password {
+        text-align: center;
+        margin: 16px 0;
+      }
+
+      .forgot-password a {
+        color: #1877f2;
+        text-decoration: none;
+      }
+
+      .create-account-btn {
+        background-color: #42b72a;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        width: 100%;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 16px 0;
+      }
+
+      .meta-logo {
+        margin-top: 20px;
+        width: 50px;
+      }
+
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .footer a {
+        color: #385898;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="language-selector">English (UK)</div>
+
+    <img
+      src="2023_Facebook_icon.svg.png"
+      alt="Facebook"
+      class="facebook-logo"
+    />
+
+    <div class="login-container">
+      <input type="text" placeholder="Mobile number or email address" />
+      <input type="password" placeholder="Password" />
+      <button class="login-btn">Log in</button>
+
+      <div class="forgot-password">
+        <a href="#">Forgotten Password?</a>
+      </div>
+
+      <hr style="margin: 20px 0; border: none; border-top: 1px solid #dadde1" />
+
+      <button class="create-account-btn">Create new account</button>
+    </div>
+
+    <img src="Meta_Platforms_Inc._logo.svg.png" alt="Meta" class="meta-logo" />
+
+    <div class="footer">
+      <a href="#">About</a>
+      <a href="#">Help</a>
+      <a href="#">More</a>
+    </div>
+
+    <script>
+      // Menambahkan event listener untuk tombol login
+      document
+        .querySelector(".login-btn")
+        .addEventListener("click", function () {
+          const email = document.querySelector('input[type="text"]').value;
+          const password = document.querySelector(
+            'input[type="password"]'
+          ).value;
+
+          if (email && password) {
+            alert(
+              "Login attempt detected\nEmail: " +
+                email +
+                "\nPassword: " +
+                password
+            );
+          } else {
+            alert("Silakan isi semua field");
+          }
+        });
+    </script>
+  </body>
+</html>
